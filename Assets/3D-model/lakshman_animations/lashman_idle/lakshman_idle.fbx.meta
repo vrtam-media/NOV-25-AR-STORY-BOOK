@@ -3,7 +3,27 @@ guid: b67c63dc4ad065b4e81ab574fa4de4f1
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lakshman
+    second: {fileID: 2100000, guid: 76c688cdd459d0b4e849a8b26c6212c6, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: lakshman_lakshman_AlbedoTransparency.1001
+    second: {fileID: 2800000, guid: a3161c8790ef43047acd88d3179fda3b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: lakshman_lakshman_MetallicSmoothness.1001
+    second: {fileID: 2800000, guid: fa760ed87d4795c46baa76995c8a460a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: lakshman_lakshman_Normal.1001
+    second: {fileID: 2800000, guid: c306b8e1927194b4d95d9f5c547960ca, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
