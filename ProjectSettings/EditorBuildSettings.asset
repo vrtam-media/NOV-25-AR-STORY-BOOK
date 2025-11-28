@@ -11,8 +11,11 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/StoryBook_AR.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/StoryBook_AR-test.unity
     guid: 142e17b4587dc434f9365b9ab202a245
+  - enabled: 1
+    path: Assets/Scenes/StoryBook_AR-popup-test-2.unity
+    guid: 2ba709befff97d34281b04ca52e8e57d
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
