@@ -1,86 +1,130 @@
 ﻿using UnityEngine;
-using Vuforia;
 using System.Collections;
-using System.Collections.Generic;
+using Vuforia;
 
+[RequireComponent(typeof(ObserverBehaviour))]
 public class VuforiaPopTrigger : MonoBehaviour
 {
-    public bool popOnlyOnce = true;
+    [Header("Options")]
+    public bool popOnlyOnce = false;
 
-    ObserverBehaviour observer;
-    bool hasPopped = false;
+    private ObserverBehaviour observer;
+    private bool isTracked = false;
+    private bool hasPoppedThisSession = false;
 
-    PopModel3D[] models;
-    Dictionary<PopModel3D, Coroutine> running = new Dictionary<PopModel3D, Coroutine>();
+    private Coroutine sessionRoutine;
 
     void Awake()
     {
         observer = GetComponent<ObserverBehaviour>();
-        models = GetComponentsInChildren<PopModel3D>(true);
+        observer.OnTargetStatusChanged += OnStatusChanged;
 
-        // Start: keep ALL models OFF
-        foreach (var m in models)
-            m.gameObject.SetActive(false);
+        HideAllPopModels();
     }
 
-    void OnEnable()
-    {
-        if (observer != null)
-            observer.OnTargetStatusChanged += OnStatusChanged;
-    }
-
-    void OnDisable()
+    void OnDestroy()
     {
         if (observer != null)
             observer.OnTargetStatusChanged -= OnStatusChanged;
     }
 
-    void OnStatusChanged(ObserverBehaviour obs, TargetStatus status)
+    private void OnStatusChanged(ObserverBehaviour obs, TargetStatus status)
     {
-        bool trackedNow =
-            status.Status == Status.TRACKED ||
-            status.Status == Status.EXTENDED_TRACKED;
+        bool trackedNow = status.Status == Status.TRACKED;
 
-        if (trackedNow)
+        if (trackedNow && !isTracked)
         {
-            if (popOnlyOnce && hasPopped) return;
-            hasPopped = true;
-
-            foreach (var m in models)
-            {
-                if (running.TryGetValue(m, out var c) && c != null)
-                    StopCoroutine(c);
-
-                running[m] = StartCoroutine(DelayThenPop(m));
-            }
+            isTracked = true;
+            hasPoppedThisSession = false;
+            StartSession();
         }
-        else
+        else if (!trackedNow && isTracked)
         {
-            foreach (var kv in running)
-                if (kv.Value != null) StopCoroutine(kv.Value);
-
-            running.Clear();
-
-            foreach (var m in models)
-            {
-                m.StopAllAudioNow();
-                m.gameObject.SetActive(false);
-            }
+            isTracked = false;
+            StopSessionAndReset();
         }
     }
 
-    IEnumerator DelayThenPop(PopModel3D m)
+    private void StartSession()
     {
-        // OFF during delay (your requirement)
-        m.gameObject.SetActive(false);
+        if (sessionRoutine != null)
+            StopCoroutine(sessionRoutine);
 
-        if (m.startDelay > 0f)
-            yield return new WaitForSeconds(m.startDelay);
+        sessionRoutine = StartCoroutine(SessionRoutine());
+    }
 
-        // ON after delay
-        m.gameObject.SetActive(true);
+    private IEnumerator SessionRoutine()
+    {
+        if (popOnlyOnce && hasPoppedThisSession)
+            yield break;
 
-        // pop + optional audios
-        m.PlayPopWithAudio();
+        var targets = GetComponentsInChildren<PopModel3D>(true);
+
+        // hide everything first (important for clean restart)
+        foreach (var t in targets)
+        {
+            if (t == null) continue;
+            t.StopAllAudioNow();
+            t.gameObject.SetActive(false);
+        }
+
+        // schedule each model by its own delay
+        foreach (var t in targets)
+        {
+            if (t == null) continue;
+            StartCoroutine(DelayedShowAndPop(t));
+        }
+
+        hasPoppedThisSession = true;
+        sessionRoutine = null;
+    }
+
+    private IEnumerator DelayedShowAndPop(PopModel3D t)
+    {
+        float d = Mathf.Max(0f, t.startDelay);
+
+        float elapsed = 0f;
+        while (elapsed < d)
+        {
+            if (!isTracked) yield break;   // marker lost during delay
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        if (!isTracked) yield break;
+
+        t.gameObject.SetActive(true);
+        t.PlayPopWithAudio();
+    }
+
+    private void StopSessionAndReset()
+    {
+        if (sessionRoutine != null)
+        {
+            StopCoroutine(sessionRoutine);
+            sessionRoutine = null;
+        }
+
+        HideAllPopModels();
+        hasPoppedThisSession = false;
+    }
+
+    private void HideAllPopModels()
+    {
+        var targets = GetComponentsInChildren<PopModel3D>(true);
+
+        foreach (var t in targets)
+        {
+            if (t == null) continue;
+            t.StopAllAudioNow();
+            t.gameObject.SetActive(false);
+        }
+    }
+
+    // ✅ Call this when env changes while tracking is still ON
+    public void RetriggerForCurrentEnv()
+    {
+        if (!isTracked) return;
+        StartSession();
     }
 }

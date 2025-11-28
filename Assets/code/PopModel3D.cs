@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PopModel3D : MonoBehaviour
 {
@@ -20,19 +21,47 @@ public class PopModel3D : MonoBehaviour
     public AudioClip popSfx;
     [Range(0f, 1f)] public float popSfxVolume = 1f;
 
-    [Header("Optional VoiceOver")]
-    public AudioSource voiceOverSource;   // drag your AudioSource here (optional)
-    public AudioClip voiceOverClip;       // optional
-    public float voiceOverDelay = 0f;     // delay AFTER model turns ON
+    // ------------------ MULTI VOICE ------------------
 
-    Vector3 originalScale;
-    Coroutine popRoutine;
-    Coroutine voiceRoutine;
-    AudioSource sfxSource;
+    [System.Serializable]
+    public class VoiceClipEntry
+    {
+        public AudioClip clip;
+        [Tooltip("Delay BEFORE this clip plays (seconds)")]
+        public float delayBefore = 0f;
+    }
+
+    [Header("Optional VoiceOver (Multiple Clips)")]
+    public AudioSource voiceOverSource;
+    public List<VoiceClipEntry> voiceClips = new();
+
+    // ------------------ NEW: ANIM DELAY ------------------
+
+    [Header("Optional Character Animation Delay")]
+    [Tooltip("Animator of this character (optional). If empty, auto-finds on this object.")]
+    public Animator characterAnimator;
+
+    [Tooltip("Delay BEFORE animator starts (seconds). Can be different per character.")]
+    public float animationDelay = 0f;
+
+    [Tooltip("If ON, animator restarts from beginning every time PlayPopWithAudio is called.")]
+    public bool restartAnimatorOnPlay = true;
+
+    // ------------------------------------------------------
+
+    private Vector3 originalScale;
+    private Coroutine popRoutine;
+    private Coroutine voiceRoutine;
+    private Coroutine animRoutine;
+    private AudioSource sfxSource;
 
     void Awake()
     {
         originalScale = transform.localScale;
+
+        // auto-find animator if not assigned
+        if (characterAnimator == null)
+            characterAnimator = GetComponent<Animator>();
 
         // create SFX audio source only if needed
         if (popSfx != null)
@@ -43,11 +72,19 @@ public class PopModel3D : MonoBehaviour
         }
     }
 
+    // called by Vuforia when env/character should pop
     public void PlayPopWithAudio()
     {
         // stop old routines
         if (popRoutine != null) StopCoroutine(popRoutine);
         if (voiceRoutine != null) StopCoroutine(voiceRoutine);
+        if (animRoutine != null) StopCoroutine(animRoutine);
+
+        // restart / pause animator immediately
+        if (characterAnimator != null)
+        {
+            characterAnimator.enabled = false;  // keep frozen until delay is done
+        }
 
         // play pop sfx immediately if assigned
         if (popSfx != null && sfxSource != null)
@@ -56,9 +93,13 @@ public class PopModel3D : MonoBehaviour
         // start pop animation
         popRoutine = StartCoroutine(PopRoutine());
 
-        // start voiceover if assigned
-        if (voiceOverSource != null && voiceOverClip != null)
-            voiceRoutine = StartCoroutine(VoiceRoutine());
+        // start voiceover sequence if assigned
+        if (voiceOverSource != null && voiceClips != null && voiceClips.Count > 0)
+            voiceRoutine = StartCoroutine(VoiceSequenceRoutine());
+
+        // start animator after delay (optional)
+        if (characterAnimator != null)
+            animRoutine = StartCoroutine(AnimationDelayRoutine());
     }
 
     IEnumerator PopRoutine()
@@ -93,21 +134,61 @@ public class PopModel3D : MonoBehaviour
         transform.localScale = endScale;
     }
 
-    IEnumerator VoiceRoutine()
+    IEnumerator VoiceSequenceRoutine()
     {
-        if (voiceOverDelay > 0f)
-            yield return new WaitForSeconds(voiceOverDelay);
+        foreach (var entry in voiceClips)
+        {
+            if (entry == null || entry.clip == null)
+                continue;
 
-        voiceOverSource.clip = voiceOverClip;
-        voiceOverSource.Play();
+            if (entry.delayBefore > 0f)
+                yield return new WaitForSeconds(entry.delayBefore);
+
+            if (!gameObject.activeInHierarchy) yield break;
+
+            voiceOverSource.clip = entry.clip;
+            voiceOverSource.Play();
+
+            while (voiceOverSource.isPlaying)
+            {
+                if (!gameObject.activeInHierarchy) yield break;
+                yield return null;
+            }
+        }
+    }
+
+    // ✅ NEW: delay animation start
+    IEnumerator AnimationDelayRoutine()
+    {
+        if (animationDelay > 0f)
+            yield return new WaitForSeconds(animationDelay);
+
+        if (!gameObject.activeInHierarchy) yield break;
+
+        characterAnimator.enabled = true;
+
+        if (restartAnimatorOnPlay)
+        {
+            // restart current state from beginning
+            characterAnimator.Play(0, 0, 0f);
+        }
     }
 
     // called by Vuforia script when marker lost
     public void StopAllAudioNow()
     {
         if (voiceRoutine != null) StopCoroutine(voiceRoutine);
+        if (animRoutine != null) StopCoroutine(animRoutine);
+
         if (voiceOverSource != null) voiceOverSource.Stop();
         if (sfxSource != null) sfxSource.Stop();
+
+        if (characterAnimator != null)
+        {
+            characterAnimator.enabled = false;
+            if (restartAnimatorOnPlay)
+                characterAnimator.Play(0, 0, 0f); // reset pose
+        }
     }
 
     void OnDisable()

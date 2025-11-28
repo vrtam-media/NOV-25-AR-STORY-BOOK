@@ -3,7 +3,22 @@ guid: 17d2fb7ef66c87f4bb34f3e7b4d424b8
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RAMER
+    second: {fileID: 2100000, guid: 663654cb7e0f8694cbe4ed4aa711f370, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ramer2_RAMER_AlbedoTransparency.1001
+    second: {fileID: 2800000, guid: bf6516f38bba2fa4cb3b4524cccf4c4b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ramer2_RAMER_Normal new
+    second: {fileID: 2800000, guid: b0a2e7e7281dfe143b8e0c6e3e2180ce, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
