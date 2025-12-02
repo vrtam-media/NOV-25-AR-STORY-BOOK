@@ -3,7 +3,27 @@ guid: de46b6cb0c1f39e4395c781e43431048
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RAMER
+    second: {fileID: 2100000, guid: 111e87457761f8f4ebd84bd84d333dae, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: arrow_aiStandardSurface2
+    second: {fileID: 2100000, guid: e972a90c6502bee4c810cee0ad4a0fc1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bow_new_lambert2
+    second: {fileID: 2100000, guid: 0688da07f28ad1c4994b8016a6635021, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: holder_aiStandardSurface2
+    second: {fileID: 2100000, guid: 38a3c234a24a589438927238eb53547c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

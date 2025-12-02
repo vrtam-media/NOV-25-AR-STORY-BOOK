@@ -3,7 +3,57 @@ guid: 0cfe0e0313d66cd4b872889e1913b236
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: arrow_aiStandardSurface2
+    second: {fileID: 2100000, guid: db64be1053b5c8e4e8d2c0eb37e00709, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bow_new_lambert2
+    second: {fileID: 2100000, guid: c2ddbf1518347b746a587d2b2452d3da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: holder_aiStandardSurface2
+    second: {fileID: 2100000, guid: ad96cecea05ab644eaa56303362df6ab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lakshman
+    second: {fileID: 2100000, guid: 8cb942e47c5df5c4497de1e23353441c, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: lakshman_lakshman_AlbedoTransparency.1001
+    second: {fileID: 2800000, guid: 8d3269da09877ab4dbff319712dfe687, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: lakshman_lakshman_MetallicSmoothness.1001
+    second: {fileID: 2800000, guid: 3d258760cd028b84c9ec03023cd365f0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: lakshman_lakshman_Normal.1001
+    second: {fileID: 2800000, guid: 4fb2d96236f173b44aac6e05a81b5278, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: weapon_et_set_002_AlbedoTransparency.1001
+    second: {fileID: 2800000, guid: b73c7528cf80fe448a8b69f8d411b899, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: weapon_et_set_002_MetallicSmoothness.1001
+    second: {fileID: 2800000, guid: f364183569c21d841abbe60e947bc0e1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: weapon_et_set_002_Normal.1001
+    second: {fileID: 2800000, guid: 89d6e89e3320ee448a9a44762ce49665, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -29,7 +79,36 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      internalID: 1827226128182048838
+      firstFrame: 0
+      lastFrame: 4
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []

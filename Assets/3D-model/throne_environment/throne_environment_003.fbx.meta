@@ -3,7 +3,122 @@ guid: 31f019dbc3a0df044b25d5c8682266af
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sword_Stone
+    second: {fileID: 2100000, guid: 9ec197505076d684cb99099322d2c790, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: beanch_wooden_bench
+    second: {fileID: 2100000, guid: 626458b6012c49745a06df5f39bad098, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert11
+    second: {fileID: 2100000, guid: 8deee35e8ea26954d9609b3adb3e85e8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert12
+    second: {fileID: 2100000, guid: 9f2274b81d7cdd2479e2afb881d140ce, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert5
+    second: {fileID: 2100000, guid: 39f8214a653988a42b596c646cd18c84, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert6
+    second: {fileID: 2100000, guid: 59adf5720b293cd41b43500aa3b6a88f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert7
+    second: {fileID: 2100000, guid: d6d807d1d62c3ae47af6468c9c4eb6b4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert8
+    second: {fileID: 2100000, guid: bd316b44182ce124aa09f2296a327dec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert9
+    second: {fileID: 2100000, guid: 9ffe1e59c37543046a177f82f83e4364, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Gemini_Generated_Image_5zve9a5zve9a5zve
+    second: {fileID: 2800000, guid: 88ffe719abdaa354fa31439d1fdbe106, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: arch_arch texture_AlbedoTransparency.1001
+    second: {fileID: 2800000, guid: fef95a3e1a8bf6d4b94474cc7373f4de, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: arch_arch texture_Normal.1001
+    second: {fileID: 2800000, guid: b80766ca3081c924888aace1d524a75f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: arch_pillar texture_AlbedoTransparency.1001
+    second: {fileID: 2800000, guid: 27eb13d163df0114dae1f58b6e025d44, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: arch_pillar texture_Normal.1001
+    second: {fileID: 2800000, guid: e9fc0f7c2a9bf5244a0063785eff1ffa, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: carved wooden bench002_tripo_mat_1ba352d7_AlbedoTransparency.1001
+    second: {fileID: 2800000, guid: 28d7b19a5dc64cc41babe04974e4d6f7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: carved wooden bench002_tripo_mat_1ba352d7_MetallicSmoothness.1001
+    second: {fileID: 2800000, guid: 4ce02c975cb75e5469093f2a024938ab, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: carved wooden bench002_tripo_mat_1ba352d7_Normal.1001
+    second: {fileID: 2800000, guid: 3efde8bbde93f3e41b61c3b36059df02, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: kk
+    second: {fileID: 2800000, guid: cbe088c3a118e944b98afc94e69c7798, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: throne_room2_wall_AlbedoTransparency.1001
+    second: {fileID: 2800000, guid: 83c542049d7283d4aaac19cbb8073717, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: throne_room2_wall_Normal.1001
+    second: {fileID: 2800000, guid: bc65e8572db55f048acd236717977048, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: throne_room_throne1_BaseColor.1001
+    second: {fileID: 2800000, guid: a1c34cd96d761674796e5b02fbb41804, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: throne_room_throne1_Normal.1001
+    second: {fileID: 2800000, guid: b0c56c49e5831f54485c7ac13dbb487a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: tt
+    second: {fileID: 2800000, guid: 8a199c3b9bafc59479d3685e8ba849fe, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
